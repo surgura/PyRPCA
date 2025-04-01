@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyrpca"
+description = "Robust principle component analysis for Python."
+version = "0.0.0"
+readme = "README.md"
+requires-python = ">=3.9,<4"
+classifiers = [
+  "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
+]
+dependencies = [
+  "numpy (>=2.2.4,<3)",
+]
+keywords = [
+  "rpca",
+  "robust pca",
+  "robust principal component analysis",
+]
+authors = [
+  {name = "Aart Stuurman", email = "aart@astuurman.com"},
+]
+maintainers = [
+  {name = "Aart Stuurman", email = "aart@astuurman.com"},
+]
+license = {file = "LICENSE"}
+
+[project.optional-dependencies]
+dev = ["black == 25.1.0"]
+
+[project.urls]
+Source = "https://github.com/surgura/PyRPCA"
+
+[tool.setuptools]
+package-dir = {"pyrpca" = "pyrpca"}
