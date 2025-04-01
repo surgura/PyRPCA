@@ -41,6 +41,6 @@ jobs:
           python-version: '3.13'
 
       - name: Build package
-        run: pip wheel . -w ./dist
+        run: pip wheel --no-deps . -w ./dist
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
