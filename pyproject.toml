@@ -28,7 +28,10 @@ maintainers = [
 license = {file = "LICENSE"}
 
 [project.optional-dependencies]
-dev = ["black == 25.1.0"]
+dev = [
+  "black == 25.1.0",
+  "pytest == 8.3.5",
+]
 
 [project.urls]
 Source = "https://github.com/surgura/PyRPCA"
