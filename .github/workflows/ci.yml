@@ -1,0 +1,80 @@
+name: ci
+
+on:
+  push:
+    branches: ['**']
+    tags: ['**']
+  pull_request:
+    branches: ['**']
+
+jobs:
+  ruff:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install package as dev
+        run: pip install ".[dev]"
+
+      - name: Ruff check
+        run: ruff check
+
+      - name: Ruff format
+        run: ruff format --check
+
+  mypy:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package as dev
+        run: pip install ".[dev]"
+
+      - name: Run mypy
+        run: mypy pyrpca
+
+  test:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package as dev
+        run: pip install ".[dev]"
+
+      - name: Run tests
+        run: pytest
+
+  deploy:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [ruff, mypy, test]
+    runs-on: ubuntu-24.04
+    environment:
+      name: publish
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Build package
+        run: pip wheel --no-deps . -w ./dist
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
