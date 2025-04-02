@@ -35,7 +35,7 @@ dev = [
 ]
 
 [project.urls]
-Source = "https://github.com/surgura/PyRPCA"
+homepage = "https://github.com/surgura/PyRPCA"
 
 [tool.setuptools]
 package-dir = {"pyrpca" = "pyrpca"}
