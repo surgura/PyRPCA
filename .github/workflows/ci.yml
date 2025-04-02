@@ -19,7 +19,10 @@ jobs:
       - name: Install package as dev
         run: pip install ".[dev]"
 
-      - name: Run Ruff
+      - name: Ruff check
+        run: ruff check
+
+      - name: Ruff format
         run: ruff format --check
 
   mypy:
