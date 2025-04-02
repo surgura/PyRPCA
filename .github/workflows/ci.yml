@@ -15,10 +15,29 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+
       - name: Install package as dev
         run: pip install ".[dev]"
+
       - name: Run Ruff
         run: ruff check
+
+  mypy:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package as dev
+        run: pip install ".[dev]"
+
+      - name: Run mypy
+        run: mypy pyrpca
 
   test:
     runs-on: ubuntu-24.04

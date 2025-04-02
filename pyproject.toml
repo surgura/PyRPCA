@@ -38,3 +38,6 @@ Source = "https://github.com/surgura/PyRPCA"
 
 [tool.setuptools]
 package-dir = {"pyrpca" = "pyrpca"}
+
+[tool.mypy]
+strict = true
