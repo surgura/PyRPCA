@@ -2,10 +2,13 @@
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools-git-versioning]
+enabled = true
+
 [project]
 name = "pyrpca"
 description = "Robust principle component analysis for Python."
-version = "0.0.0"
+dynamic = ["version"]
 readme = "README.md"
 requires-python = ">=3.9,<4"
 classifiers = [
