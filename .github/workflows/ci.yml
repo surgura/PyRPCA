@@ -8,6 +8,18 @@ on:
     branches: ['**']
 
 jobs:
+  ruff:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install package as dev
+        run: pip install ".[dev]"
+      - name: Run Ruff
+        run: ruff check
+
   test:
     runs-on: ubuntu-24.04
     strategy:
