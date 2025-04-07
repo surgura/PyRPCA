@@ -11,7 +11,7 @@ from pyrpca import rpca_pcp_ialm
 data = ...
 
 # decide on sparsity factor.
-# this parameter is also commonly known as `lambda`.
+# this parameter is also commonly known as 'lambda'.
 sparsity_factor = 1.0 / numpy.sqrt(max(data.shape))
 
 # run the ialm algorithm.
